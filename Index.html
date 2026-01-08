@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Wandering Signal Studios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+        name="description"
+        content="Wandering Signal Studios – stories, sound, and strange little worlds."
+    />
+    <style>
+        :root {
+            --bg: #05060a;
+            --bg-alt: #0c0f18;
+            --accent: #f5b45c;
+            --accent-soft: rgba(245, 180, 92, 0.1);
+            --text: #f5f5f5;
+            --muted: #a3a7b8;
+            --border: #1c2233;
+            --card-bg: #0b0f19;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+            --shadow-soft: 0 18px 35px rgba(0, 0, 0, 0.65);
+            --shadow-subtle: 0 10px 25px rgba(0, 0, 0, 0.45);
+            --transition-fast: 180ms ease-out;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                sans-serif;
+            background: radial-gradient(circle at top, #14182a 0, #05060a 45%, #02030a 100%);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 24px 20px 64px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(16px);
+            background: linear-gradient(
+                to bottom,
+                rgba(5, 6, 10, 0.92),
+                rgba(5, 6, 10, 0.7),
+                transparent
+            );
+            padding-bottom: 8px;
+        }
+
+        .nav {
+            max-width: 1120px;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            background: conic-gradient(
+                from 220deg,
+                #f5b45c,
+                #f58f6c,
+                #7f6ff8,
+                #4cc0ff,
+                #f5b45c
+            );
+            position: relative;
+            box-shadow: 0 0 24px rgba(245, 180, 92, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .brand-mark::after {
+            content: "";
+            position: absolute;
+            inset: 4px;
+            border-radius: inherit;
+            background: radial-gradient(circle at 20% 0, #14182a, #05060a 65%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
+        }
+
+        .brand-initial {
+            position: relative;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand-name {
+            font-weight: 600;
+            letter-spacing: 0.09em;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .brand-tagline {
+            font-size: 11px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #f5b45c, #f58f6c, #7f6ff8);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            margin-top: 32px;
+            padding: 26px 22px 26px;
+            border-radius: 32px;
+            border: 1px solid rgba(125, 135, 179, 0.35);
+            background:
+                radial-gradient(circle at top left, rgba(245, 180, 92, 0.18), transparent 55%),
+                radial-gradient(circle at top right, rgba(127, 111, 248, 0.25), transparent 55%),
+                linear-gradient(135deg, rgba(9, 11, 24, 0.96), rgba(2, 3, 12, 0.98));
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+            gap: 24px;
+            align-items: center;
+        }
+
+        .hero-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(5, 6, 10, 0.85);
+            border: 1px solid rgba(245, 180, 92, 0.35);
+        }
+
+        .hero-kicker-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 16px rgba(245, 180, 92, 0.85);
+        }
+
+        .hero-title {
+            margin-top: 14px;
+            font-size: clamp(28px, 3.1vw, 34px);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .hero-title span {
+            background: linear-gradient(120deg, #ffffff, #f5b45c, #f58f6c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-body {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--muted);
+            max-width: 520px;
+        }
+
+        .hero-grid {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.17em;
+            color: var(--muted);
+        }
+
+        .hero-grid span {
+            padding: 6px 9px;
+            border-radius: 999px;
+            background: rgba(5, 6, 10, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .hero-cta-row {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .hero-cta {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #05060a;
+            background: linear-gradient(120deg, #f5b45c, #f58f6c);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                filter var(--transition-fast);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.03);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-secondary {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .hero-secondary strong {
+            color: #e4e7f5;
+            font-weight: 500;
+        }
+
+        .hero-orbit {
+            position: relative;
+            height: 220px;
+            border-radius: 26px;
+            background: radial-gradient(circle at 20% 0, #2a2f48, #05060a);
+            border: 1px solid rgba(156, 173, 255, 0.4);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+        }
+
+        .hero-orbit-inner {
+            position: absolute;
+            inset: 14px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(28, 34, 60, 0.9);
+            background: radial-gradient(circle at 50% 10%, #171c30, #05060a 75%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tower-pulse {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 999px;
+            border: 1px solid rgba(245, 180, 92, 0.6);
+            background: radial-gradient(circle at 50% 0, #f5b45c, #05060a);
+            box-shadow: 0 0 38px rgba(245, 180, 92, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tower-pulse::before,
+        .tower-pulse::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            border: 1px dashed rgba(245, 180, 92, 0.45);
+            inset: -18px;
+            opacity: 0.55;
+        }
+
+        .tower-icon {
+            position: relative;
+            width: 46px;
+            height: 70px;
+            border-radius: 18px;
+            border: 1px solid rgba(5, 6, 10, 0.8);
+            background: linear-gradient(180deg, #10121f, #05060a);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tower-icon::before {
+            content: "";
+            position: absolute;
+            top: 6px;
+            width: 10px;
+            height: 16px;
+            border-radius: 6px;
+            background: linear-gradient(180deg, #f5b45c, #f58f6c);
+            box-shadow: 0 0 16px rgba(245, 180, 92, 0.7);
+        }
+
+        .tower-icon::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            width: 26px;
+            height: 3px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(245, 180, 92, 0.9), transparent);
+            opacity: 0.9;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            inset: 24px 20px;
+            border-radius: 999px;
+            border: 1px dashed rgba(129, 145, 210, 0.35);
+        }
+
+        .orbit-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--muted);
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(5, 6, 10, 0.95);
+            border: 1px solid rgba(85, 102, 175, 0.7);
+        }
+
+        .orbit-pill {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 11px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(5, 6, 10, 0.98);
+            border: 1px solid rgba(245, 180, 92, 0.7);
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .orbit-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        section {
+            margin-top: 40px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-intro {
+            font-size: 13px;
+            color: var(--muted);
+            max-width: 620px;
+            margin-bottom: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            padding: 16px 15px 15px;
+            border-radius: var(--radius-lg);
+            background: var(--card-bg);
+            border: 1px solid rgba(46, 58, 98, 0.8);
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(245, 180, 92, 0.06), transparent 55%);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+            pointer-events: none;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--muted);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .card-body {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .card-meta {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #d1d4e4;
+            opacity: 0.9;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .pill {
+            font-size: 11px;
+            color: var(--muted);
+            padding: 5px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(61, 73, 111, 0.9);
+            background: rgba(5, 6, 10, 0.9);
+        }
+
+        .contact {
+            margin-top: 32px;
+            padding: 18px 16px;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(135deg, rgba(9, 11, 24, 0.98), rgba(2, 3, 12, 0.98));
+            border: 1px solid rgba(245, 180, 92, 0.4);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-text {
+            max-width: 520px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .contact-text strong {
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .contact-mail {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            padding: 9px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(245, 180, 92, 0.75);
+            background: rgba(5, 6, 10, 0.96);
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .contact-mail span {
+            opacity: 0.85;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(40, 52, 92, 0.9);
+            font-size: 11px;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-badge {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .footer-right {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: minmax(0, 1fr);
+                padding: 20px 16px;
+            }
+
+            .hero-orbit {
+                height: 200px;
+                order: -1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page {
+                padding: 18px 16px 48px;
+            }
+
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 560px) {
+            .grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-grid {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            }
+
+            .hero {
+                margin-top: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav">
+            <div class="brand">
+                <div class="brand-mark">
+                    <span class="brand-initial">WS</span>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-name">Wandering Signal Studios</div>
+                    <div class="brand-tagline">Stories · Sound · Strange Worlds</div>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#work">What We Make</a>
+                <a href="#projects">Signals</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div>
+                <div class="hero-kicker">
+                    <span class="hero-kicker-dot"></span>
+                    Transmission in progress
+                </div>
+                <h1 class="hero-title">
+                    A small studio for <span>big, weird signals</span>.
+                </h1>
+                <p class="hero-body">
+                    Wandering Signal Studios is a one-person creative house working at the edges of
+                    music, story, and atmosphere—building projects that feel like you stumbled across
+                    a strange late-night broadcast from another timeline.
+                </p>
+
+                <div class="hero-grid">
+                    <span>Concept albums &amp; bands</span>
+                    <span>Carbon Radio broadcast</span>
+                    <span>Odd little storyworlds</span>
+                </div>
+
+                <div class="hero-cta-row">
+                    <button class="hero-cta" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">
+                        View the signals
+                        <span>↗</span>
+                    </button>
+                    <div class="hero-secondary">
+                        <strong>No corporate sheen.</strong> Just a human with too many ideas and a studio that refuses to sit still.
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-orbit" aria-hidden="true">
+                <div class="hero-orbit-inner">
+                    <div class="tower-pulse">
+                        <div class="tower-icon"></div>
+                    </div>
+                </div>
+                <div class="orbit-ring"></div>
+                <div class="orbit-label">Studio beacon · WSS</div>
+                <div class="orbit-pill">
+                    <span class="orbit-pill-dot"></span>
+                    <span>Independent signal</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-label">Studio</div>
+            <h2 class="section-title">What is Wandering Signal Studios?</h2>
+            <p class="section-intro">
+                It's the umbrella for a growing cluster of small, obsessive projects: invented bands,
+                long-form albums, radio experiments, storybooks, and physical goods that all orbit the
+                same idea—build worlds worth getting lost in.
+            </p>
+        </section>
+
+        <section id="work">
+            <div class="section-label">Output</div>
+            <h2 class="section-title">What we make here</h2>
+            <p class="section-intro">
+                The details change, but the through-line is the same: atmosphere, narrative, and a
+                slightly sideways sense of reality.
+            </p>
+
+            <div class="grid">
+                <article class="card">
+                    <div class="card-tag">Audio</div>
+                    <h3 class="card-title">Bands, albums &amp; soundtracks</h3>
+                    <p class="card-body">
+                        Concept records, alter-ego bands, and long-play soundtracks built for late nights,
+                        long drives, and headphones-only sessions.
+                    </p>
+                    <div class="card-meta">From quiet folk to neon-lit electronic.</div>
+                    <div class="pill-row">
+                        <div class="pill">Concept albums</div>
+                        <div class="pill">Cohesive arcs</div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-tag">Broadcast</div>
+                    <h3 class="card-title">Carbon Radio</h3>
+                    <p class="card-body">
+                        A slow-burn internet station airing deep cuts, experimental shows, and future
+                        archive material from the WSS universe.
+                    </p>
+                    <div class="card-meta">Built to feel like a signal you weren't supposed to find.</div>
+                    <div class="pill-row">
+                        <div class="pill">Long-form shows</div>
+                        <div class="pill">Curated sets</div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="card-tag">Story</div>
+                    <h3 class="card-title">Worlds &amp; storybooks</h3>
+                    <p class="card-body">
+                        Illustrated narratives and strange little fables, designed like records you can read:
+                        liner-notes worlds, maps, and recurring characters.
+                    </p>
+                    <div class="card-meta">Built to live alongside the music, not behind it.</div>
+                    <div class="pill-row">
+                        <div class="pill">Narration</div>
+                        <div class="pill">Illustration</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="section-label">Signals</div>
+            <h2 class="section-title">Some of the current channels</h2>
+            <p class="section-intro">
+                These are the main "faces" of the studio right now. Names may change, experiments
+                won't.
+            </p>
+
+            <div class="grid">
+                <article class="card">
+                    <div class="card-tag">Umbrella</div>
+                    <h3 class="card-title">Wandering Signal Studios</h3>
+                    <p class="card-body">
+                        The core studio: music, story, radio, and whatever other weird formats make sense.
+                        Everything rolls up into this signal.
+                    </p>
+                    <div class="card-meta">Creative direction, writing, and production.</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-tag">Radio</div>
+                    <h3 class="card-title">Carbon Radio</h3>
+                    <p class="card-body">
+                        A long-timeline broadcast project. Rotating shows, deep archives, and future room
+                        for other creators to beam in their own transmissions.
+                    </p>
+                    <div class="card-meta">Independent, internet-native, never fully "done."</div>
+                </article>
+
+                <article class="card">
+                    <div class="card-tag">Physical</div>
+                    <h3 class="card-title">Even Better Earth</h3>
+                    <p class="card-body">
+                        The physical side of the universe: small-batch balms, oils, and other tangible
+                        objects that feel like they came from the same world as the sound.
+                    </p>
+                    <div class="card-meta">Home to that sage, Meridian Beard, and future experiments.</div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="section-label">Contact</div>
+            <h2 class="section-title">Reach the studio</h2>
+
+            <div class="contact">
+                <p class="contact-text">
+                    If you're interested in collaborating, licensing, or building something odd together,
+                    you can reach the studio directly. <strong>No spam funnels, no "synergy decks."</strong>
+                    Just an inbox and a real human on the other side.
+                </p>
+                <a class="contact-mail" href="mailto:hello@wanderingsignalstudios.com">
+                    <span>hello@wanderingsignalstudios.com</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-badge">Wandering Signal Studios · Independent since 2026</div>
+            <div class="footer-right">
+                <span>Based somewhere between night and light.</span>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+            link.addEventListener("click", function (e) {
+                const targetId = this.getAttribute("href").slice(1);
+                const target = document.getElementById(targetId);
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: "smooth" });
+            });
+        });
+    </script>
+</body>
+</html>
