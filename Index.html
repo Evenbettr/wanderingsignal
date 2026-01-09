@@ -622,6 +622,225 @@
                 margin-top: 24px;
             }
         }
+            /* Listen Live · Tower Broadcast */
+
+    #listen {
+      margin-top: 40px;
+    }
+
+    .tower-card {
+      margin-top: 12px;
+      padding: 16px 16px 18px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(9, 11, 24, 0.98), rgba(2, 3, 12, 0.98));
+      border: 1px solid rgba(96, 110, 176, 0.9);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tower-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 5% 0%, rgba(245, 180, 92, 0.16), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(127, 111, 248, 0.18), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .tower-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 1;
+    }
+
+    .tower-led {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow:
+        0 0 10px rgba(245, 180, 92, 0.9),
+        0 0 24px rgba(245, 180, 92, 0.7);
+      flex-shrink: 0;
+    }
+
+    .tower-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tower-header-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .tower-header-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tower-shell {
+      position: relative;
+      margin-top: 4px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 20% 0, #222943, #05060a 70%);
+      border: 1px solid rgba(120, 135, 210, 0.9);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.8);
+      overflow: hidden;
+    }
+
+    .tower-shell-orbit {
+      position: absolute;
+      inset: 12px;
+      border-radius: 16px;
+      border: 1px dashed rgba(121, 137, 215, 0.45);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .tower-shell-inner {
+      position: relative;
+      padding: 16px 16px 14px;
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .tower-shell-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .tower-beacon {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 180, 92, 0.6);
+      background: radial-gradient(circle at 50% 0, #f5b45c, #05060a);
+      box-shadow: 0 0 34px rgba(245, 180, 92, 0.8);
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tower-beacon::before,
+    .tower-beacon::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(245, 180, 92, 0.45);
+      inset: -16px;
+      opacity: 0.68;
+    }
+
+    .tower-beacon::after {
+      inset: -30px;
+      opacity: 0.4;
+    }
+
+    .tower-beacon-core {
+      position: relative;
+      width: 40px;
+      height: 70px;
+      border-radius: 16px;
+      border: 1px solid rgba(5, 6, 10, 0.9);
+      background: linear-gradient(180deg, #10121f, #05060a);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.9);
+    }
+
+    .tower-beacon-core::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 16px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #f5b45c, #f58f6c);
+      box-shadow: 0 0 18px rgba(245, 180, 92, 0.85);
+    }
+
+    .tower-beacon-core::after {
+      content: "";
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 3px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(245, 180, 92, 0.9), transparent);
+      opacity: 0.9;
+    }
+
+    .tower-player {
+      position: relative;
+      border-radius: 14px;
+      background: rgba(5, 6, 10, 0.95);
+      border: 1px solid rgba(53, 66, 118, 0.9);
+      box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
+      padding: 10px;
+    }
+
+    .tower-player::before {
+      content: "Signal locked · Carbon Radio";
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(163, 167, 184, 0.85);
+    }
+
+    .station-embed {
+      margin-top: 18px;
+    }
+
+    .station-embed iframe,
+    .station-embed > * {
+      width: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      border: none;
+      display: block;
+    }
+
+    .tower-meta {
+      position: relative;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      z-index: 1;
+    }
+
+    .tower-meta-item {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .tower-meta-sep {
+      opacity: 0.6;
+    }
+
     </style>
 </head>
 <body>
